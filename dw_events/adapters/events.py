@@ -1,7 +1,12 @@
 from abc import abstractmethod
 from typing import Type
 from dw_core.cqrs import Event
-from dw_events.ports import EventSubscriber, EventEmitter, EventHandler
+from dw_events.ports import (
+    EventSubscriber,
+    EventEmitter,
+    DeferredEmitter,
+    EventHandler,
+)
 from dw_events.serializer import (
     serialize_event,
     unserialize_event,
@@ -10,12 +15,37 @@ from dw_events.serializer import (
 
 
 class AbstractEventEmitter(EventEmitter):
+    def __init__(self, subscriber: EventSubscriber):
+        self.subscriber = subscriber
+
     def emit(self, event: Event):
         serialized = serialize_event(event)
         self.serialized_emit(serialized)
 
     @abstractmethod
-    def serialized_emit(serialized_event: str):
+    def serialized_emit(self, serialized_event: str):
+        pass
+
+
+class AbstractDeferfedEmitter(DeferredEmitter):
+    def __init__(
+        self, subscriber: EventSubscriber, event_emitter: EventEmitter = None
+    ):
+        self.subscriber = subscriber
+        self.event_emitter = event_emitter
+
+    def defer_emit(self, event: Event):
+        subscribers = self.subscriber.get_subscribers(type(event))
+        try:
+            self.defer_execution(event, subscribers)
+        except Exception as e:
+            if self.event_emitter:
+                self.event_emitter.emit(event)
+            else:
+                raise e
+
+    @abstractmethod
+    def defer_execution(self, event: Event, subscribers):
         pass
 
 
@@ -31,9 +61,6 @@ class BasicSubscriber(EventSubscriber):
 
     def get_subscribers(self, event: Type[Event]):
         return self.subscriptions.get(event, [])
-
-    def autosubscribe(self):
-        pass
 
 
 class EventHandlerRunnerMixin:

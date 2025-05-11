@@ -3,12 +3,23 @@ from typing import Type
 from dw_core.cqrs import Event
 
 
-__all__ = ['EventEmitter', 'EventSubscriber', 'EventHandler']
+__all__ = [
+    'EventEmitter',
+    'DeferredEmitter',
+    'EventSubscriber',
+    'EventHandler',
+]
 
 
 class EventEmitter(ABC):
     @abstractmethod
     def emit(self, event: Event):
+        pass
+
+
+class DeferredEmitter(ABC):
+    @abstractmethod
+    def defer_emit(self, event: Event):
         pass
 
 
@@ -19,10 +30,6 @@ class EventSubscriber(ABC):
 
     @abstractmethod
     def get_subscribers(self, event_class: Type[Event]):
-        pass
-
-    @abstractmethod
-    def autosubscribe(self):
         pass
 
 
