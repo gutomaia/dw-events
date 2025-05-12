@@ -48,7 +48,7 @@ def is_event_task(obj: Any) -> bool:
 
 
 def filter_event_handlers(
-    entries: List[Tuple[str, Union[FunctionType, Type[BackgroundTask]]]]
+    entries: List[Tuple[str, Union[FunctionType, Type[BackgroundTask]]]],
 ) -> List[Tuple[Any, Type[Event]]]:
     filtered = []
     for _, entry in entries:

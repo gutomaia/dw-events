@@ -1,6 +1,5 @@
 from abc import ABCMeta, abstractmethod
 
-
 __all__ = [
     'TaskProgressCallback',
     'TaskETACallback',
