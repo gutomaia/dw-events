@@ -29,7 +29,7 @@ class AbstractEventEmitter(EventEmitter):
         pass
 
 
-class AbstractDeferfedEmitter(DeferredEmitter):
+class AbstractDeferredEmitter(DeferredEmitter):
     def __init__(
         self, subscriber: EventSubscriber, event_emitter: EventEmitter = None
     ):

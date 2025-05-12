@@ -5,7 +5,7 @@ from unittest.mock import Mock
 from dw_core.cqrs import Event
 
 from dw_events.adapters import (
-    AbstractDeferfedEmitter,
+    AbstractDeferredEmitter,
     AbstractEventEmitter,
     BasicSubscriber,
 )
@@ -29,7 +29,7 @@ class BasicEventEmitter(AbstractEventEmitter):
                 handler(event)
 
 
-class BasicDeferredEmitter(AbstractDeferfedEmitter):
+class BasicDeferredEmitter(AbstractDeferredEmitter):
     def __init__(
         self, subscriber: BasicSubscriber, event_emitter: EventEmitter = None
     ):
