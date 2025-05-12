@@ -1,11 +1,12 @@
 from unittest import TestCase
 
 from dw_core.cqrs import Event
+
+from dw_events.adapters import BasicSubscriber
 from dw_events.tests.event_subscriber_spec import (
     EventSubscriberSpec,
     ExecuterType,
 )
-from dw_events.adapters import BasicSubscriber
 
 
 class BasicSubscriberTest(EventSubscriberSpec, TestCase):

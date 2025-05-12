@@ -1,7 +1,7 @@
 from typing import Callable, Type, Union
-from dw_core.ports import BackgroundTask
-from dw_core.cqrs import Event
 
+from dw_core.cqrs import Event
+from dw_core.ports import BackgroundTask
 
 ExecuterType = Union[Type[BackgroundTask], Callable[[Event], None]]
 

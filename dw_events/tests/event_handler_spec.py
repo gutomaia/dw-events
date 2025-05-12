@@ -1,7 +1,8 @@
 from typing import Callable
+
+from dw_core.adapters import Task
 from dw_core.cqrs import Event
 from dw_core.ports import BackgroundTask
-from dw_core.adapters import Task
 
 
 def execute(event):

@@ -1,11 +1,12 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-from dw_events.tests.auto_subscribe_spec import AutoSubscribeSpec
-from dw_events.task import autosubcribe
-from dw_events.ports import EventSubscriber
-from dw_events.adapters import BasicSubscriber
 import inject
+
+from dw_events.adapters import BasicSubscriber
+from dw_events.ports import EventSubscriber
+from dw_events.task import autosubcribe
+from dw_events.tests.auto_subscribe_spec import AutoSubscribeSpec
 
 
 class AutoSubscribeTest(AutoSubscribeSpec, TestCase):

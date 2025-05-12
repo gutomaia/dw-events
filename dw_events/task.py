@@ -1,12 +1,13 @@
-from types import NoneType
-from typing import Callable, Type, List, Any, get_type_hints, Tuple, Union
 import inspect
-from dw_core.cqrs import Event
-from dw_core.core import get_ports
-from dw_core.ports import BackgroundTask
-from dw_events.ports import EventSubscriber
-import inject
+from types import NoneType
+from typing import Any, Callable, List, Tuple, Type, Union, get_type_hints
 
+import inject
+from dw_core.core import get_ports
+from dw_core.cqrs import Event
+from dw_core.ports import BackgroundTask
+
+from dw_events.ports import EventSubscriber
 
 FunctionType = Callable[[Event], None]
 

@@ -1,6 +1,7 @@
-from dw_core.cqrs import Event
-import json
 import importlib
+import json
+
+from dw_core.cqrs import Event
 
 
 def serialize_class(class_):

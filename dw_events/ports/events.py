@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Type
-from dw_core.cqrs import Event
 
+from dw_core.cqrs import Event
 
 __all__ = [
     'EventEmitter',

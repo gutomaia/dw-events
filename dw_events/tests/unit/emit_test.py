@@ -1,15 +1,16 @@
 from typing import Callable, get_type_hints
 from unittest import TestCase
 from unittest.mock import Mock
+
+import inject
 from dw_core.cqrs import Event
-from dw_events.tests.emit_spec import EmitSpec
+
+from dw_events.adapters import AbstractEventEmitter, BasicSubscriber
+from dw_events.core import emit
 from dw_events.ports import EventEmitter
-from dw_events.adapters import AbstractEventEmitter
-from dw_events.adapters import BasicSubscriber
 from dw_events.serializer import unserialize_event
 from dw_events.task import is_event_function
-from dw_events.core import emit
-import inject
+from dw_events.tests.emit_spec import EmitSpec
 
 
 class BasicEventEmitter(AbstractEventEmitter):

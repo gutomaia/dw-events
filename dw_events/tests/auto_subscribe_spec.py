@@ -1,5 +1,5 @@
-from dw_core.cqrs import Event
 from dw_core.adapters import Task
+from dw_core.cqrs import Event
 
 
 class AutoSubscribeSpec:

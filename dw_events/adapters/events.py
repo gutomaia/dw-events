@@ -1,16 +1,18 @@
 from abc import abstractmethod
 from typing import Type
+
 from dw_core.cqrs import Event
+
 from dw_events.ports import (
-    EventSubscriber,
-    EventEmitter,
     DeferredEmitter,
+    EventEmitter,
     EventHandler,
+    EventSubscriber,
 )
 from dw_events.serializer import (
+    serialize_class,
     serialize_event,
     unserialize_event,
-    serialize_class,
 )
 
 

@@ -1,16 +1,18 @@
 from typing import Callable, get_type_hints
 from unittest import TestCase
 from unittest.mock import Mock
+
 from dw_core.cqrs import Event
-from dw_events.tests.defer_spec import DeferSpec
-from dw_events.ports import EventEmitter
+
 from dw_events.adapters import (
     AbstractDeferfedEmitter,
     AbstractEventEmitter,
     BasicSubscriber,
 )
+from dw_events.ports import EventEmitter
 from dw_events.serializer import unserialize_event
 from dw_events.task import is_event_function
+from dw_events.tests.defer_spec import DeferSpec
 
 
 class BasicEventEmitter(AbstractEventEmitter):

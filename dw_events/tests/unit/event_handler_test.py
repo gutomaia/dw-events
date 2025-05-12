@@ -1,12 +1,13 @@
 from typing import Callable
 from unittest import TestCase
 from unittest.mock import patch
+
 from dw_core.cqrs import Event
-from dw_events.tests.event_handler_spec import EventHandlerSpec, execute
-from dw_events.adapters import AbstractEventHandler
-from dw_events.adapters import BasicSubscriber
+
+from dw_events.adapters import AbstractEventHandler, BasicSubscriber
 from dw_events.serializer import unserialize_class, unserialize_event
 from dw_events.task import is_event_function, is_event_task
+from dw_events.tests.event_handler_spec import EventHandlerSpec, execute
 
 
 class BasicEventHandler(AbstractEventHandler):
