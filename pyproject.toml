@@ -36,3 +36,6 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.plugins."ports"]
 "test-notify" = "dw_events.notify:notify_send"
 "tasker" = "dw_events.notify:Tasker"
+
+[tool.poetry.plugins."argument_resolvers"]
+"dw-events-deferred-emitter" = "dw_events.resolver:DeferredEmitterArgumentResolver"
