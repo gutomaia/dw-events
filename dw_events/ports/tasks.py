@@ -1,4 +1,16 @@
-from abc import ABCMeta, abstractmethod
+"""Task interfaces — re-exported from dw-core, their one true home.
+
+This module used to DUPLICATE dw-core's callback interfaces, which
+made issubclass/isinstance checks fail across the seam whenever a
+task implemented one copy and a consumer checked the other. The
+duplicates are gone; imports from here keep working.
+"""
+from dw_core.ports import (
+    TaskETACallback,
+    TaskETAListenerInterface,
+    TaskProgressCallback,
+    TaskProgressListenerInterface,
+)
 
 __all__ = [
     'TaskProgressCallback',
@@ -6,49 +18,3 @@ __all__ = [
     'TaskProgressListenerInterface',
     'TaskETAListenerInterface',
 ]
-
-
-class TaskProgressCallback(metaclass=ABCMeta):
-    @abstractmethod
-    def set_progress(self, percentage: float) -> None:
-        pass
-
-
-class TaskETACallback(metaclass=ABCMeta):
-    @abstractmethod
-    def set_eta(self, seconds: float) -> None:
-        pass
-
-
-class TaskProgressListenerInterface(metaclass=ABCMeta):
-    @abstractmethod
-    def add_progress_callback(self, callback: TaskProgressCallback):
-        pass
-
-    @abstractmethod
-    def remove_progress_callback(self, callback: TaskProgressCallback):
-        pass
-
-    @abstractmethod
-    def set_progress(self, percentage: float):
-        pass
-
-
-class TaskETAListenerInterface(metaclass=ABCMeta):
-    @abstractmethod
-    def add_eta_callback(self, callback: TaskETACallback):
-        pass
-
-    @abstractmethod
-    def remove_eta_callback(self, callback: TaskETACallback):
-        pass
-
-    @abstractmethod
-    def set_eta(self, eta: float):
-        pass
-
-
-class BackgroundTask(metaclass=ABCMeta):
-    @abstractmethod
-    def run(self):
-        pass
