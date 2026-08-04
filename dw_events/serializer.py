@@ -20,8 +20,11 @@ def serialize_class(class_):
 
 
 def unserialize_class(data):
-    module_name = data.pop('__module__')
-    class_name = data.pop('__class__')
+    # READ, never pop: callers inspect a serialized handler and
+    # then forward the same dict onward — mutating it here handed
+    # celery workers an empty payload (measured).
+    module_name = data['__module__']
+    class_name = data['__class__']
     module = importlib.import_module(module_name)
     model_class = getattr(module, class_name)
     return model_class
@@ -43,5 +46,7 @@ def serialize_event(event: Event):
 def unserialize_event(serialized_data: str):
     data = json.loads(serialized_data)
     model_class = unserialize_class(data)
+    data.pop('__module__', None)
+    data.pop('__class__', None)
     obj = model_class(**data)
     return obj
